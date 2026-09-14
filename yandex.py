@@ -5,122 +5,133 @@ from datetime import datetime, timedelta
 import paho.mqtt.client as mqtt
 
 mapper = [
-    {"topic": "/devices/weather",
+    {"topic": "weather",
      "meta": {"driver": "yandex-weather", "title": {"en": "Yandex Weather"}}
      },
-    {"topic": "/devices/weather/meta/driver",
+    {"topic": "weather/meta/driver",
      "value": "yandex-weather"
      },
-    {"topic": "/devices/weather/meta/name",
+    {"topic": "weather/meta/name",
      "value": "Yandex Weather"
      },
     {"path": ["fact", "icon"],
-     "topic": "/devices/weather/controls/fact_icon",
+     "topic": "weather/controls/fact_icon",
      "meta": {"order": 1, "readonly": True, "type": "text"}
      },
     {"path": ["fact", "condition"],
-     "topic": "/devices/weather/controls/fact_condition",
+     "topic": "weather/controls/fact_condition",
      "meta": {"order": 2, "readonly": True, "type": "text"}
      },
     {"path": ["fact", "cloudness"],
-     "topic": "/devices/weather/controls/fact_cloudness",
+     "topic": "weather/controls/fact_cloudness",
      "meta": {"order": 3, "readonly": True, "type": "value"}
      },
     {"path": ["fact", "temp"],
-     "topic": "/devices/weather/controls/fact_temperature",
+     "topic": "weather/controls/fact_temperature",
      "meta": {"order": 4, "readonly": True, "type": "value"}
      },
     {"path": ["fact", "humidity"],
-     "topic": "/devices/weather/controls/fact_humidity",
+     "topic": "weather/controls/fact_humidity",
      "meta": {"order": 5, "readonly": True, "type": "value"}
      },
     {"path": ["info", "def_pressure_mm"],
-     "topic": "/devices/weather/controls/fact_pressure",
+     "topic": "weather/controls/fact_pressure",
      "meta": {"order": 6, "readonly": True, "type": "value"}
      },
     {"path": ["forecasts", 0, "parts", "day", "icon"],
-     "topic": "/devices/weather/controls/forecast_today_day_icon",
+     "topic": "weather/controls/forecast_today_day_icon",
      "meta": {"order": 7, "readonly": True, "type": "text"}
      },
     {"path": ["forecasts", 0, "parts", "day", "condition"],
-     "topic": "/devices/weather/controls/forecast_today_day_condition",
+     "topic": "weather/controls/forecast_today_day_condition",
      "meta": {"order": 8, "readonly": True, "type": "text"}
      },
     {"path": ["forecasts", 0, "parts", "day", "cloudness"],
-     "topic": "/devices/weather/controls/forecast_today_day_cloudness",
+     "topic": "weather/controls/forecast_today_day_cloudness",
      "meta": {"order": 9, "readonly": True, "type": "value"}
      },
     {"path": ["forecasts", 0, "parts", "day", "temp_avg"],
-     "topic": "/devices/weather/controls/forecast_today_day_temperature",
+     "topic": "weather/controls/forecast_today_day_temperature",
      "meta": {"order": 10, "readonly": True, "type": "value"}
      },
     {"path": ["forecasts", 0, "parts", "day", "humidity"],
-     "topic": "/devices/weather/controls/forecast_today_day_humidity",
+     "topic": "weather/controls/forecast_today_day_humidity",
      "meta": {"order": 11, "readonly": True, "type": "value"}
      },
 
     {"path": ["forecasts", 0, "parts", "night", "icon"],
-     "topic": "/devices/weather/controls/forecast_today_night_icon",
+     "topic": "weather/controls/forecast_today_night_icon",
      "meta": {"order": 12, "readonly": True, "type": "text"}
      },
     {"path": ["forecasts", 0, "parts", "night", "condition"],
-     "topic": "/devices/weather/controls/forecast_today_night_condition",
+     "topic": "weather/controls/forecast_today_night_condition",
      "meta": {"order": 13, "readonly": True, "type": "text"}
      },
     {"path": ["forecasts", 0, "parts", "night", "cloudness"],
-     "topic": "/devices/weather/controls/forecast_today_night_cloudness",
+     "topic": "weather/controls/forecast_today_night_cloudness",
      "meta": {"order": 14, "readonly": True, "type": "value"}
      },
     {"path": ["forecasts", 0, "parts", "night", "temp_avg"],
-     "topic": "/devices/weather/controls/forecast_today_night_temperature",
+     "topic": "weather/controls/forecast_today_night_temperature",
      "meta": {"order": 15, "readonly": True, "type": "value"}
      },
     {"path": ["forecasts", 0, "parts", "night", "humidity"],
-     "topic": "/devices/weather/controls/forecast_today_night_humidity",
+     "topic": "weather/controls/forecast_today_night_humidity",
      "meta": {"order": 16, "readonly": True, "type": "value"}
      },
     {"path": ["forecasts", 1, "parts", "day", "icon"],
-     "topic": "/devices/weather/controls/forecast_tomorrow_day_icon",
+     "topic": "weather/controls/forecast_tomorrow_day_icon",
      "meta": {"order": 17, "readonly": True, "type": "text"}
      },
     {"path": ["forecasts", 1, "parts", "day", "condition"],
-     "topic": "/devices/weather/controls/forecast_tomorrow_day_condition",
+     "topic": "weather/controls/forecast_tomorrow_day_condition",
      "meta": {"order": 18, "readonly": True, "type": "text"}
      },
     {"path": ["forecasts", 1, "parts", "day", "cloudness"],
-     "topic": "/devices/weather/controls/forecast_tomorrow_day_cloudness",
+     "topic": "weather/controls/forecast_tomorrow_day_cloudness",
      "meta": {"order": 19, "readonly": True, "type": "value"}
      },
     {"path": ["forecasts", 1, "parts", "day", "temp_avg"],
-     "topic": "/devices/weather/controls/forecast_tomorrow_day_temperature",
+     "topic": "weather/controls/forecast_tomorrow_day_temperature",
      "meta": {"order": 20, "readonly": True, "type": "value"}
      },
     {"path": ["forecasts", 1, "parts", "day", "humidity"],
-     "topic": "/devices/weather/controls/forecast_tomorrow_day_humidity",
+     "topic": "weather/controls/forecast_tomorrow_day_humidity",
      "meta": {"order": 21, "readonly": True, "type": "value"}
      },
 
     {"path": ["forecasts", 1, "parts", "night", "icon"],
-     "topic": "/devices/weather/controls/forecast_tomorrow_night_icon",
+     "topic": "weather/controls/forecast_tomorrow_night_icon",
      "meta": {"order": 22, "readonly": True, "type": "text"}
      },
     {"path": ["forecasts", 1, "parts", "night", "condition"],
-     "topic": "/devices/weather/controls/forecast_tomorrow_night_condition",
+     "topic": "weather/controls/forecast_tomorrow_night_condition",
      "meta": {"order": 23, "readonly": True, "type": "text"}
      },
     {"path": ["forecasts", 1, "parts", "night", "cloudness"],
-     "topic": "/devices/weather/controls/forecast_tomorrow_night_cloudness",
+     "topic": "weather/controls/forecast_tomorrow_night_cloudness",
      "meta": {"order": 24, "readonly": True, "type": "value"}
      },
     {"path": ["forecasts", 1, "parts", "night", "temp_avg"],
-     "topic": "/devices/weather/controls/forecast_tomorrow_night_temperature",
+     "topic": "weather/controls/forecast_tomorrow_night_temperature",
      "meta": {"order": 25, "readonly": True, "type": "value"}
      },
     {"path": ["forecasts", 1, "parts", "night", "humidity"],
-     "topic": "/devices/weather/controls/forecast_tomorrow_night_humidity",
+     "topic": "weather/controls/forecast_tomorrow_night_humidity",
      "meta": {"order": 26, "readonly": True, "type": "value"}
+     },
+    {"path": ["fact", "temp"],
+     "topic": "hvac/kidsroom_small/outdoor_temperature/set"
+     },
+    {"path": ["fact", "temp"],
+     "topic": "hvac/kidsroom_big/outdoor_temperature/set"
+     },
+    {"path": ["fact", "temp"],
+     "topic": "hvac/bedroom/outdoor_temperature/set"
+     },
+    {"path": ["fact", "temp"],
+     "topic": "hvac/lounge/outdoor_temperature/set"
      }
-
 ]
 
 
@@ -202,6 +213,6 @@ mqttc.on_message = on_message
 mqttc.on_subscribe = on_subscribe
 mqttc.on_publish = on_publish
 
-mqttc.connect("127.0.0.1", 1883, 60)
+mqttc.connect("10.0.0.1", 1883, 60)
 
 mqttc.loop_forever()
